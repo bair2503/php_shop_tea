@@ -6,7 +6,7 @@ require '../requires/connect.php';
     $password = md5($_POST['password']);
 
 function generateCode($length=6) {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
     $code = "";
     $clen = strlen($chars) - 1;
     while (strlen($code) < $length) {
@@ -20,16 +20,15 @@ function generateCode($length=6) {
 
         $user = mysqli_fetch_assoc($check_user);
 
-        $_SESSION['user'] = [
+        $_COOKIE['user'] = [
             "id" => $user['id'],
             "user_id" => generateCode($length=15),
             "full_name" => $user['full_name'],
-            "avatar" => $user['avatar'],
             "email" => $user['email']
         ];
-        mysqli_query($link, "UPDATE users SET user_id='".$_SESSION['user']['user_id'] ."' WHERE id='".$_SESSION['user']['id']."'" );
-        setcookie("id", $_SESSION['user']['id'], time()+60*60*24*30, "/");
-        setcookie("user_id", $_SESSION['user']['user_id'], time()+60*60*24*30, "/", null, null, true);
+        mysqli_query($link, "UPDATE users SET user_id='".$_COOKIE['user']['user_id'] ."' WHERE id='".$_COOKIE['user']['id']."'" );
+        setcookie("id", $_COOKIE['user']['id'], time()+60*60*24*30, "/");
+        setcookie("user_id", $_COOKIE['user']['user_id'], time()+60*60*24*30, "/", null, null, true);
         header('Location: ../profile.php');
     } else {
         $_SESSION['message'] = 'Не верный пароль или логин';

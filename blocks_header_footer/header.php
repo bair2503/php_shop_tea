@@ -1,14 +1,25 @@
+<!--blocks_header_footer/header.php -->
 <!-- Menu -->
-
+<?php
+require 'requires/connect.php';
+$query = 'SELECT COUNT(id) FROM basket WHERE user_id ="' . $_COOKIE['user_id'] . '"';
+$result = $link->query($query);
+$row = $result->fetch_row();
+?>
 <div class="menu">
 
     <!-- Search -->
     <div class="menu_search">
-        <form action="#" id="menu_search_form" class="menu_search_form">
-            <input type="text" class="search_input" placeholder="Search Item" required="required">
-            <button class="menu_search_button"><img src="images/search.png" alt=""></button>
+        <form id="menu_search_form" class="menu_search_form" onsubmit="return false;">
+            <input type="text" class="search_input" id="search_input" placeholder="Search Item" required="required">
+            <button class="menu_search_button" type="submit">
+                <img src="images/search.png" alt="">
+            </button>
         </form>
+        <!-- Здесь появятся результаты -->
+        <div id="search_results" style="background:white; position:absolute; z-index:1000; max-height:200px; overflow-y:auto; width: 300px;"></div>
     </div>
+
     <!-- Navigation -->
     <div class="menu_nav">
         <ul>
@@ -20,7 +31,9 @@
     <!-- Contact Info -->
     <div class="menu_contact">
         <div class="menu_phone d-flex flex-row align-items-center justify-content-start">
-            <div><div><img src="images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div></div>
+            <div>
+                <div><img src="images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div>
+            </div>
             <div>+7 926-078-89-79</div>
         </div>
         <div class="menu_social">
@@ -66,13 +79,23 @@
                     </form>
                 </div>
                 <!-- User -->
-                <div class="user"><a href="../registration.php"><div><img src="../images/user.svg" alt="https://www.flaticon.com/authors/freepik"><div>1</div></div></a></div>
+                <div class="user" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><a href="../registration.php">
+                        <div><img class="svg" src="../images/user.svg" alt="https://www.flaticon.com/authors/freepik">
+                            <div>1</div>
+                        </div>
+                    </a></div>
                 <!-- Cart -->
-                <div class="cart"><a href="../cart.php"><div><img class="svg" src="../images/cart.svg" alt="https://www.flaticon.com/authors/freepik"></div></a></div>
+                <div class="cart"><a href="../cart.php">
+                        <div><img class="svg" src="../images/cart.svg" alt="https://www.flaticon.com/authors/freepik">
+                            <div id="basket_count"><?php echo $row[0]; ?></div>
+                        </div>
+                    </a></div>
                 <!-- Phone -->
                 <div class="header_phone d-flex flex-row align-items-center justify-content-start">
-                    <div><div><img src="../images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div></div>
-                    <div>+7 926-078-89-79</div>
+                    <div>
+                        <div><img src="../images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div>
+                    </div>
+                    <div>+7 926-078-89-99</div>
                 </div>
             </div>
         </div>

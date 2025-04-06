@@ -798,6 +798,8 @@ section
 	width: 100%;
 	padding-bottom: 28px;
 	border-bottom: solid 1px #ededed;
+
+
 }
 .cart_bar_list
 {
@@ -817,13 +819,13 @@ section
 }
 .cart_bar_list li:not(:first-child):not(:last-child)
 {
-	margin-right: 30px;
+	margin-right: 20px;
 }
 .item_list > *:first-child
 {
 	text-align: left;
 }
-.cart_items
+.product_texts
 {
 	
 }
@@ -1549,4 +1551,59 @@ section
 	font-size: 16px;
 	color: #969696;
 	font-weight: 300;
+}
+
+.cl-btn-2 {
+	margin: 0px;
+	display: block;
+	justify-content: center;
+	height: 4em;
+}
+.cl-btn-2 div {
+	cursor: pointer;
+	position: relative;
+	height: 34px;
+	width: 25px;
+}
+.cl-btn-2 .leftright {
+	height: 4px;
+	width: 25px;
+	position: absolute;
+	margin-top: 24px;
+	background-color: #969696;
+	border-radius: 2px;
+	transform: rotate(45deg);
+	transition: all .3s ease-in;
+}
+.cl-btn-2 .rightleft {
+	height: 4px;
+	width: 25px;
+	position: absolute;
+	margin-top: 24px;
+	background-color: #969696;
+	border-radius: 2px;
+	transform: rotate(-45deg);
+	transition: all .3s ease-in;
+}
+.cl-btn-2 .close-btn {
+	margin: 40px 0 0 -12px;
+	position: absolute;
+	color: #969696;
+	font-family: Tahoma, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: all .3s ease-in;
+	opacity: 0;
+}
+.cl-btn-2 div:hover .leftright {
+	transform: rotate(-45deg);
+	background-color: #000;
+}
+.cl-btn-2 div:hover .rightleft {
+	transform: rotate(45deg);
+	background-color: #000;
+}
+.cl-btn-2 div:hover .close-btn {
+	opacity: 1;
 }

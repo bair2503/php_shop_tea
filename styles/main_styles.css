@@ -54,8 +54,8 @@ div
 	display: block;
 	position: relative;
 	-webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 ul
 {
@@ -125,7 +125,7 @@ p a:hover::after
 }
 p::selection
 {
-	
+
 }
 h1{font-size: 48px;}
 h2{font-size: 36px;}
@@ -140,14 +140,14 @@ h1, h2, h3, h4, h5, h6
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	line-height: 1.2;
 }
-h1::selection, 
-h2::selection, 
-h3::selection, 
-h4::selection, 
-h5::selection, 
+h1::selection,
+h2::selection,
+h3::selection,
+h4::selection,
+h5::selection,
 h6::selection
 {
-	
+
 }
 img
 {
@@ -281,8 +281,8 @@ section
 }
 .parallax-window
 {
-    min-height: 400px;
-    background: transparent;
+	min-height: 400px;
+	background: transparent;
 }
 .parallax_background
 {
@@ -467,9 +467,9 @@ section
 	font-size: 16px !important;
 	font-weight: 300 !important;
 	color: #2e2e2e !important;
-} 
+}
 .search_input:-ms-input-placeholder
-{ 
+{
 	font-size: 16px !important;
 	font-weight: 300 !important;
 	color: #2e2e2e !important;
@@ -540,6 +540,22 @@ section
 	max-width: 100%;
 	height: auto;
 }
+.cart a > div > div
+{
+	position: absolute;
+	top: -16px;
+	right: -15px;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background: #2fce98;
+	text-align: center;
+	line-height: 24px;
+	color: #FFFFFF;
+	font-size: 14px;
+	font-weight: 700;
+}
+
 .header_phone > div:first-child > div
 {
 	width: 36px;
@@ -554,12 +570,12 @@ section
 }
 .svg path, .svg rect, .svg polygon
 {
-    fill: #778990;
-    -webkit-transition: all 200ms ease;
-    -moz-transition: all 200ms ease;
-    -ms-transition: all 200ms ease;
-    -o-transition: all 200ms ease;
-    transition: all 200ms ease;
+	fill: #778990;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
 }
 .svg:hover path,
 .svg:hover rect,
@@ -603,8 +619,8 @@ section
 {
 	position: relative;
 	font-size: 20px;
-    color: #2e2e2e;
-    font-weight: 400;
+	color: #2e2e2e;
+	font-weight: 400;
 }
 .menu_nav ul li a:hover
 {
@@ -1016,12 +1032,12 @@ section
 }
 .product_button svg path, .product_button svg rect, .product_button svg polygon
 {
-    fill: #4a4a4a;
-    -webkit-transition: all 200ms ease;
-    -moz-transition: all 200ms ease;
-    -ms-transition: all 200ms ease;
-    -o-transition: all 200ms ease;
-    transition: all 200ms ease;
+	fill: #4a4a4a;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
 }
 .product_button:hover svg path,
 .product_button:hover svg rect,
@@ -1349,7 +1365,7 @@ section
 }
 .feature_col:first-child
 {
-	
+
 }
 .feature_col:first-child .feature_icon
 {
@@ -1571,9 +1587,9 @@ section
 	font-size: 16px !important;
 	font-weight: 500 !important;
 	color: #4a4a4a !important;
-} 
+}
 .newsletter_input:-ms-input-placeholder
-{ 
+{
 	font-size: 16px !important;
 	font-weight: 500 !important;
 	color: #4a4a4a !important;

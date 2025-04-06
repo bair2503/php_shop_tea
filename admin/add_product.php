@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+
+require "../requires/connect.php";
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -18,50 +27,67 @@
 </head>
 <body>
 <?php require "blocks_admin/admin_header.php"?>
+<?php require "../requires/connect.php" ?>
 <div class="col-lg-12">
+
             <div class="panel panel-default">
                 <div class="panel-heading">Добавление продукта</div>
                 <div class="panel-body">
                     <div class="col-lg-12">
-                        <form role="form">
+                        <form role="form" action="add_productquery.php" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label>Название страницы</label>
-                                <textarea class="form-control" rows="1"></textarea>
+                                <label>Страница продукта</label>
+                                <input class="form-control"name="product" rows="1" type="text"> <?php echo $_SESSION['field']['product']; ?></input>
                             </div>
                             <div class="form-group">
                                 <label>Название продукта</label>
-                                <textarea class="form-control" rows="1"></textarea>
+                                <input class="form-control" rows="2" name="name_product" type="text"><?php echo $_SESSION['field']['name_product']; ?></input>
+                            </div>
+                            <div class="form-group">
+                                <label>Статус продукта</label>
+                                <input class="form-control" rows="3" name="status_product" type="text"><?php echo $_SESSION['field']['status_product']; ?></input>
+                            </div>
+                            <div class="form-group">
+                                <label>Скидки Распродажа</label>
+                                <input class="form-control" rows="3" name="sela_product" type="number"><?php echo $_SESSION['field']['sela_product']; ?></input>
                             </div>
                             <div class="form-group">
                                 <label>Категория продукта</label>
-                                <textarea class="form-control" rows="1"></textarea>
-                            </div>
-                            <div class="form-group checkbox">
-                                <label>
-                                    <input type="checkbox">Remember me
-                                </label>
+                                <input class="form-control" rows="4" name="category_product" type="text"><?php echo $_SESSION['field']['category_product']; ?></input>
                             </div>
                             <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                                <p class="help-block">Example block-level help text here.</p>
+                                <label>Фото продукта</label>
+                                <input type="file" name="file1">
+                                <p class="help-block">Основное фото</p>
                             </div>
                             <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                <label>Фото продукта</label>
+                                <input type="file" name="file2">
+                                <p class="help-block">Второе фото</p>
                             </div>
-                            <label>Validation</label>
-                            <div class="form-group has-success">
-                                <input class="form-control" placeholder="Success">
+                            <div class="form-group">
+                                <label>Вес Продукта</label>
+                                <input class="form-control" rows="3" type="number" name="wight"><?php echo $_SESSION['field']['wight']; ?></input>
                             </div>
-                            <div class="form-group has-warning">
-                                <input class="form-control" placeholder="Warning">
+                            <div class="form-group">
+                                <label>Вес Продукта</label>
+                                <input class="form-control" rows="3" type="number" name="price"><?php echo $_SESSION['field']['price']; ?></input>
                             </div>
-                            <div class="form-group has-error">
-                                <input class="form-control" placeholder="Error">
+                            <div class="form-group">
+                                <label>Описание продукта</label>
+                                <input class="form-control" rows="3" type="text" name="text"><?php echo $_SESSION['field']['text']; ?></input>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
+                            <input type="submit" class="btn btn-primary" value="добавить"></input>
+                            <p>
+                                Добавление продукта -
+                            </p>
+                            <?php
+                            if($_SESSION['message']){
+                                echo '<p class="msg">' .$_SESSION['message']. '</p>';
+                            }
+                            unset($_SESSION['message']);
+                            ?>
+                            <button type="reset" class="btn btn-default">Сброс</button>
                     </div>
                     </form>
                 </div>

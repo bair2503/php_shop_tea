@@ -46,20 +46,24 @@
                     </li>
                 </ul>
                 <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-            <?php
-            require "requires/connect.php";
-            $query = "SELECT * FROM comment";
-            $result = mysqli_query($link,$query);
-            while ($row = mysqli_fetch_row($result)){
-            ?>
+
             <div class="panel-body">
+                <?php
+                require "../requires/connect.php";
+                $query = "SELECT * FROM comment";
+                $result = mysqli_query($link,$query);
+                while ($row = mysqli_fetch_row($result)){
+                $query1 = "SELECT * FROM tea";
+                $result1 = mysqli_query($link,$query1);
+                $row1 = mysqli_fetch_row($result1);
+                ?>
                 <ul>
                     <li class="left clearfix"><span class="chat-img pull-left">
-								<img src="http://placehold.it/60/30a5ff/fff" alt="User Avatar" class="img-circle" />
+								<img src="img/<?php echo $row1[5] ?>.jpg" alt="" height="50px" width="50px">
 								</span>
                         <div class="chat-body clearfix">
 
-                            <div class="header"><strong class="primary-font">Автор:  | Email: </p></strong> <small class="text-muted">32 mins ago</small></div>
+                            <div class="header"><strong class="primary-font">Автор:<?php echo $row1[2]?>  | Email:<?php echo $row[3]?> </p></strong> <small class="text-muted">32 mins ago</small></div>
                             <p>
                         </div>
                     </li>
@@ -68,7 +72,7 @@
 								</span>
                         <div class="chat-body clearfix">
                             <div class="header"><strong class="pull-left primary-font">Jane Doe</strong> <small class="text-muted">6 mins ago</small></div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc.</p>
+                            <p><?php echo $row[6]?></p>
                         </div>
                     </li>
                     <li class="left clearfix"><span class="chat-img pull-left">

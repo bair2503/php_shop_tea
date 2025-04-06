@@ -45,9 +45,6 @@ require "../requires/connect.php";
                     <div class="col-xs-4 col-md-4 col-lg-4 no-padding">покупатель
                     <input type="text" placeholder="покупатель">
                     </div>
-                    <div class="col-xs-4 col-md-4 col-lg-4 no-padding">Итого
-                        <input type="text" placeholder="Итого">
-                    </div>
                     <div class="col-xs-4 col-md-4 col-lg-4 no-padding">Дата добавления
                     <input type="text" placeholder="Дата добавления">
                     </div>
@@ -64,6 +61,49 @@ require "../requires/connect.php";
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Заказы
+                        </div>
+                        <div class="table-wrapper">
+                            <table class="fl-table">
+                                <thead>
+                                <tr>
+                                    <th>№ Заказа</th>
+                                    <th>Дата заказа</th>
+                                    <th>Номер Пользователя</th>
+                                    <th>Статус Заказа</th>
+                                    <th>Имя</th>
+                                    <th>Фамилия</th>
+                                    <th>Регион/Город</th>
+                                    <th>Адрес</th>
+                                    <th>Почтовый индекс</th>
+                                    <th>Телефон</th>
+                                    <th>Почта</th>
+                                    <th>Способ Оплаты</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                require "../requires/connect.php";
+                                $query = "SELECT * FROM orders_info";
+                                $result = mysqli_query($link,$query);
+                                while ($row = mysqli_fetch_row($result)){
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $row[0]?></td>
+                                        <td><?php echo $row[1]?></td>
+                                        <td><?php echo $row[2]?></td>
+                                        <td><?php echo $row[3]?></td>
+                                        <td><?php echo $row[4]?></td>
+                                        <td><?php echo $row[5]?></td>
+                                        <td><?php echo $row[6]?></td>
+                                        <td><?php echo $row[7]?></td>
+                                        <td><?php echo $row[8]?></td>
+                                        <td><?php echo $row[9]?></td>
+                                        <td><?php echo $row[10]?></td>
+                                        <td><?php echo $row[11]?></td>
+                                    </tr>
+                                <?php }?>
+                                <tbody>
+                            </table>
                         </div>
                             <div class="col-lg-12">
                             </div>
@@ -82,24 +122,35 @@ require "../requires/connect.php";
                                         <table class="table table-bordered">
                                             <thead>
                                             <tr>
-                                                <th>Заказа № </th>
-                                                <th>Покупатель</th>
-                                                <th>статус</th>
-                                                <th>Всего</th>
-                                                <th>Создан</th>
-                                                <th>Обновлен</th>
-                                                <th>Действия</th>
+                                                <th>№ Заказа</th>
+                                                <th>Дата заказа</th>
+                                                <th>Номер Пользователя</th>
+                                                <th>Статус Заказа</th>
+                                                <th>Имя</th>
+                                                <th>Фамилия</th>
+                                                <th>Регион/Город</th>
+                                                <th>Адрес</th>
+                                                <th>Почтовый индекс</th>
+                                                <th>Телефон</th>
+                                                <th>Почта</th>
+                                                <th>Способ Оплаты</th>
 
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <td><?php echo $row[0]?></td>
+                                                <td><?php echo $row[1]?></td>
                                                 <td><?php echo $row[2]?></td>
                                                 <td><?php echo $row[3]?></td>
                                                 <td><?php echo $row[4]?></td>
-                                                <td><?php echo $row[3]?></td>
-
+                                                <td><?php echo $row[5]?></td>
+                                                <td><?php echo $row[6]?></td>
+                                                <td><?php echo $row[7]?></td>
+                                                <td><?php echo $row[8]?></td>
+                                                <td><?php echo $row[9]?></td>
+                                                <td><?php echo $row[10]?></td>
+                                                <td><?php echo $row[11]?></td>
 
                                             </tr>
                                             </tbody>
@@ -112,7 +163,7 @@ require "../requires/connect.php";
                             </div>
 
 
-                        </div><!--/.row-
+                        </div>
 
     <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

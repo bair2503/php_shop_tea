@@ -10,30 +10,32 @@
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="styles/checkout.css">
 <link rel="stylesheet" type="text/css" href="styles/checkout_responsive.css">
+    <link rel="stylesheet" type="text/css" href="styles/my.css">
 </head>
 <body>
-<?php require "blocks_header_footer/header.php"?>
-<?php require "blocks_header_footer/header.php"?>
-<?php require "blocks_header_footer/header.php";
+<?php
+require "requires/user_id.php";
+require "blocks_header_footer/header.php";
 require "requires/connect.php";
+
 $timestamp = date('Y-m-d H:i:s');
-$query = "INSERT INTO orders_info (data_orders ,user_id, status_order)  VALUES ('$timestamp',".$_COOKIE['id'].", 0)";
+$query = "INSERT INTO orders_info (data_orders ,user_id, status_order)  VALUES ('$timestamp',".$_COOKIE['id'].", '1')";
+echo $query;
 $result = mysqli_query($link, $query);
 $id_order = $link -> insert_id;
 
 foreach ($_POST['basket'] as $prod){
     $tea_id = $prod[0];
     $tea_col = $prod[1];
-    $query = "SELECT price FROM tea WHERE id=".$tea_id;
+    $weight = $prod[2];
+    $query = "SELECT price FROM tea_weight WHERE tea_id=".$tea_id.' AND weight='.$weight;
+
     $result = mysqli_query($link, $query);
     $row = $result -> fetch_row();
-    $tea_price = $row[0];
-    $query = "INSERT INTO order_items (id_order , id_product, col_product, price) VALUES ($id_order, $tea_id,$tea_col, $tea_price)";
-    mysqli_query($link,$query);
-
+    $price = $row[0];
+    $query = "INSERT INTO orders_items (id_order, id_product, col_product, price,weight) VALUES ($id_order, $tea_id,$tea_col, $price, $weight)";
+    $result1=mysqli_query($link,$query);
 }
-
-
 ?>
 
 		<div class="home">
@@ -60,16 +62,16 @@ foreach ($_POST['basket'] as $prod){
 						<div class="billing">
 							<div class="checkout_title">Данные</div>
 							<div class="checkout_form_container">
-								<form action="orders.php"  id="checkout_form" class="checkout_form">
+								<form action="orders.php" method="post" id="checkout_form" class="checkout_form">
                                     <input type="hidden" name="order_id" value="<?php echo $id_order ?>">
 									<div class="row">
 										<div class="col-lg-6">
 											<!-- Name -->
-											<input type="text" id="checkout_name" class="checkout_input" placeholder="Имя" required="required">
+											<input type="text" id="checkout_name" class="checkout_input" name="name" placeholder="Имя" required="required">
 										</div>
 										<div class="col-lg-6">
 											<!-- Last Name -->
-											<input type="text" id="checkout_last_name" class="checkout_input" placeholder="Фамилия" required="required">
+											<input type="text" id="checkout_last_name" class="checkout_input" name="lastname" placeholder="Фамилия" required="required">
 										</div>
 									</div>
 									<div>
@@ -82,12 +84,12 @@ foreach ($_POST['basket'] as $prod){
 									</div>
 									<div>
 										<!-- Address -->
-										<input type="text" id="checkout_address" class="checkout_input" placeholder="Адрес доставки" required="required">
+										<input type="text" id="checkout_address" name="address" class="checkout_input" placeholder="Адрес доставки" required="required">
 
 									</div>
 									<div>
 										<!-- Zipcode -->
-										<input type="text" id="checkout_zipcode" class="checkout_input" placeholder="индекс" required="required">
+										<input type="text" id="checkout_zipcode" class="checkout_input" name="index" placeholder="индекс" required="required">
 									</div>
 									<div>
 										<!-- City / Town -->
@@ -99,11 +101,11 @@ foreach ($_POST['basket'] as $prod){
 									</div>
 									<div>
 										<!-- Phone no -->
-										<input type="phone" id="checkout_phone" class="checkout_input" placeholder="Телефон" required="required">
+										<input type="phone" id="checkout_phone" class="checkout_input" name="telephone" placeholder="Телефон" required="required">
 									</div>
 									<div>
 										<!-- Email -->
-										<input type="phone" id="checkout_email" class="checkout_input" placeholder="Email" required="required">
+										<input type="phone" id="checkout_email" class="checkout_input" placeholder="Email" name="email" required="required">
 									</div>
 									<div class="checkout_extra">
 										<ul>
@@ -130,7 +132,7 @@ foreach ($_POST['basket'] as $prod){
 											</li>
 										</ul>
 									</div>
-								</form>
+
 							</div>
 						</div>
 					</div>
@@ -147,7 +149,7 @@ foreach ($_POST['basket'] as $prod){
 									</li>
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">Доставка</div>
-										<div class="cart_extra_total_value ml-auto">Адрес Доставки</div>
+										<div class="cart_extra_total_value ml-auto"><?php echo $_POST['address'];?> </div>
 									</li>
 									<li class="d-flex flex-row align-items-center justify-content-start">
 										<div class="cart_extra_total_title">К оплате</div>
@@ -159,21 +161,21 @@ foreach ($_POST['basket'] as $prod){
 									<ul>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
-												<input type="radio" id="radio_1" name="payment_radio" class="payment_radio" value="1">
+												<input type="radio" id="radio_1" name="paymentmetod" class="payment_radio" value="Card">
 												<span class="radio_mark"></span>
 												<span class="radio_text">Картой</span>
 											</label>
 										</li>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
-												<input type="radio" id="radio_2" name="payment_radio" class="payment_radio" value="2">
+												<input type="radio" id="radio_2" name="paymentmetod" class="payment_radio" value="Nal">
 												<span class="radio_mark"></span>
 												<span class="radio_text">Наличными курьеру</span>
 											</label>
 										</li>
 										<li class="shipping_option d-flex flex-row align-items-center justify-content-start">
 											<label class="radio_container">
-												<input type="radio" id="radio_3" name="payment_radio" class="payment_radio" value="3" checked>
+												<input type="radio" id="radio_3" name="paymentmetod" class="payment_radio" value="Deleverri" checked>
 												<span class="radio_mark"></span>
 												<span class="radio_text">Онлайн</span>
 											</label>
@@ -183,7 +185,8 @@ foreach ($_POST['basket'] as $prod){
 								<div class="cart_text">
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integ er bibendum sodales arcu id te mpus. Ut consectetur lacus.</p>
 								</div>
-								<div class="checkout_button trans_200"><a href="orders.php">оформить заказ</a></div>
+								<div class="checkout_button trans_200"><input type="submit" name="orders" value="Оформление заказа"></a></div>
+                                </form>
 							</div>
 						</div>
 					</div>

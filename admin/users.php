@@ -23,45 +23,44 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Users
-                </div>
-                <div class="panel-body">
-                    <div class="canvas-wrapper">
-                    <?php
-
-                    require "../requires/connect.php";
-                    $query = "SELECT * FROM users";
-                    $result = mysqli_query($link,$query);
-                    while ($row = mysqli_fetch_row($result)){
+                Пользователи
+                <div class="table-wrapper">
+                    <table class="fl-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Login</th>
+                            <th>Email</th>
+                            <th>Avatar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        require "../requires/connect.php";
+                        $query = "SELECT * FROM users";
+                        $result = mysqli_query($link,$query);
+                        while ($row = mysqli_fetch_row($result)){
                         ?>
-
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>id пользователя</th>
-                                <th>Имя пользователя</th>
-                                <th>Логин</th>
-                                <th>email</th>
-                                <th>аватар</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><?php echo $row[0]?></td>
-                                <td><?php echo $row[1]?></td>
-                                <td><?php echo $row[2]?></td>
-                                <td><?php echo $row[3]?></td>
-                                <td><img src="../<?php echo $row[5]?>" width="50" alt=""></td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    <?php }?>
+                        <tr>
+                            <td><?php echo $row[0]?></td>
+                            <td><?php echo $row[1]?></td>
+                            <td><?php echo $row[2]?></td>
+                            <td><?php echo $row[3]?></td>
+                            <td><?php echo $row[6]?></td>
+                        </tr>
+                        <?php }?>
+                        <tbody>
+                    </table>
                 </div>
-</div>
+            </div>
+        </div>
+    </div>
 </div><!--/.row-->
+
+
+
+
 
 
 <script src="js/jquery-1.11.1.min.js"></script>

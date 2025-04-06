@@ -1,7 +1,7 @@
 <?php
 session_start();
-require '../requires/user_id.php';
 require '../requires/connect.php';
+
 
 $_SESSION['field']['full_name'] = $_POST['full_name'];
 $_SESSION['field']['login'] = $_POST['login'];
@@ -20,14 +20,6 @@ $errors = false;
         $_SESSION['message'] = 'пароли не совпадают';
         $errors = true;
     }
-        $path = 'img/avatar/' . time() . $_FILES['avatar']['name'];
-
-        if (!move_uploaded_file($_FILES['avatar']['tmp_name'], '../' . $path)) {
-            if(strlen($_SESSION['message']) != 0)
-                $_SESSION['message'].='<br />';
-            $_SESSION['message'] .= 'Ошибка при загрузке';
-            $errors = true;
-        }
         $result= $link -> query("SELECT id FROM users WHERE login = '$login'");
         if (mysqli_num_rows($result)!=0){
 
@@ -55,7 +47,7 @@ $errors = false;
 
 if (!$errors) {
     $password = md5($password);
-    mysqli_query($link, "INSERT INTO `users` (`id`, `full_name`, `login`, `email`, `password`, `avatar`, `user_id`) VALUES (NULL, '$full_name', '$login', '$email', '$password', '$path', '')");
+    mysqli_query($link, "INSERT INTO `users` (`id`, `full_name`, `login`, `email`, `password`, `user_id`) VALUES (NULL, '$full_name', '$login', '$email', '$password',  '')");
     $_SESSION['message'] = 'Регистрация прошла успешно!';
     header('Location:../login.php');
 }else

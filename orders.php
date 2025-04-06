@@ -12,35 +12,26 @@
     <link rel="stylesheet" type="text/css" href="styles/checkout_responsive.css">
 </head>
 <body>
-<?php require "blocks_header_footer/header.php";
+
+<?php
+require "requires/user_id.php";
+require "blocks_header_footer/header.php";
 require "requires/connect.php";
 $timestamp = date('Y-m-d H:i:s');
-$query = "INSERT INTO orders_info (data_orders ,user_id, status_order )  VALUES ('$timestamp',".$_COOKIE['id'].", 0)";
+$query = "UPDATE orders_info SET data_orders='$timestamp', user_id=".$_COOKIE['id'].", status_order='1', name='".$_POST['name']."', lastname='".$_POST['lastname']."', checkout_country='".$_POST['checkout_country']."', address='".$_POST['address']."', post_index='".$_POST['index']."', telephone='".$_POST['telephone']."', email='".$_POST['email']."', paymentmetod='".$_POST['paymentmetod']."'  WHERE id=".$_POST['order_id'] ;
+echo $query.'<br>';
 $result = mysqli_query($link, $query);
 $order_id = $link -> insert_id;
-
-foreach ($_POST['basket'] as $prod){
-    $tea_id = $prod[0];
-    $tea_col = $prod[1];
-    $query = "SELECT price FROM tea WHERE id=".$tea_id;
-    $result = mysqli_query($link, $query);
-    $row = $result -> fetch_row();
-    $tea_price = $row[0];
-    $query = "INSERT INTO order_items (id_order , id_product, col_product, price) VALUES ($order_id, $tea_id,$tea_col, $tea_price)";
-    mysqli_query($link,$query);
-
-}
-
 
 ?>
 
 <div class="home">
     <div class="home_container d-flex flex-column align-items-center justify-content-end">
         <div class="home_content text-center">
-            <div class="home_title">Ваш заказ оформлен</div>
+            <div class="home_title">Ваш заказ оформлен </div>
             <div class="breadcrumbs d-flex flex-column align-items-center justify-content-center">
                 <ul class="d-flex flex-row align-items-start justify-content-start text-center">
-                    <li>Ваш номер заказа 0001</li>
+                    <li>Ваш номер заказа <?php echo $query?></li>
                 </ul>
             </div>
 
