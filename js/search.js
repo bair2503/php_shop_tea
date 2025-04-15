@@ -1,17 +1,32 @@
-document.getElementById('search_input').addEventListener('input', function () {
-    const query = this.value.trim();
-
-    if (query.length < 3) {
-        document.getElementById('search_results').innerHTML = '';
+function performSearch() {
+    const searchTerm = document.getElementById('search_input').value;
+    const resultsDiv = document.getElementById('search_results');
+    
+    if(searchTerm.length < 2) {
+        resultsDiv.innerHTML = '';
         return;
     }
 
-    fetch('blocks_header_footer/search_ajax.php?q=' + encodeURIComponent(query))
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('search_results').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Ошибка поиска:', error);
-        });
+    // Задержка для уменьшения запросов (300 мс)
+    setTimeout(() => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        
+        xhr.onload = function() {
+            if(this.status == 200) {
+                resultsDiv.innerHTML = this.responseText;
+                resultsDiv.style.display = 'block';
+            }
+        };
+        
+        xhr.send('query=' + encodeURIComponent(searchTerm));
+    }, 300);
+}
+
+// Скрытие результатов при клике вне блока
+document.addEventListener('click', function(e) {
+    if(!e.target.closest('.menu_search')) {
+        document.getElementById('search_results').style.display = 'none';
+    }
 });

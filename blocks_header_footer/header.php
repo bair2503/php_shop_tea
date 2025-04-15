@@ -1,7 +1,7 @@
 <!--blocks_header_footer/header.php -->
 <!-- Menu -->
 <?php
-require 'requires/connect.php';
+require './requires/connect.php';
 $query = 'SELECT COUNT(id) FROM basket WHERE user_id ="' . $_COOKIE['user_id'] . '"';
 $result = $link->query($query);
 $row = $result->fetch_row();
@@ -10,15 +10,16 @@ $row = $result->fetch_row();
 
     <!-- Search -->
     <div class="menu_search">
-        <form id="menu_search_form" class="menu_search_form" onsubmit="return false;">
-            <input type="text" class="search_input" id="search_input" placeholder="Search Item" required="required">
+        <form id="menu_search_form" class="menu_search_form" method="POST" onsubmit="return false;">
+            <input type="text" class="search_input" id="search_input" placeholder="Search Item" autocomplete="off" spellcheck="false" required oninput="performSearch()">
             <button class="menu_search_button" type="submit">
-                <img src="images/search.png" alt="">
+                <i class="fas fa-search"></i>
             </button>
+            <div id="search_results" class="search-results"></div>
         </form>
-        <!-- Здесь появятся результаты -->
-        <div id="search_results" style="background:white; position:absolute; z-index:1000; max-height:200px; overflow-y:auto; width: 300px;"></div>
-    </div>
+    <!-- Здесь появятся результаты -->
+    <div id="search_results" style="background: white; position: absolute; z-index: 1000; max-height: 200px; overflow-y: auto; width: 300px;"></div>
+</div>
 
     <!-- Navigation -->
     <div class="menu_nav">
@@ -72,12 +73,23 @@ $row = $result->fetch_row();
             </nav>
             <div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
                 <!-- Search -->
-                <div class="header_search">
-                    <form action="#" id="header_search_form">
-                        <input type="text" class="search_input" placeholder="поиск" required="required">
-                        <button class="header_search_button"><img src="../images/search.png" alt=""></button>
-                    </form>
-                </div>
+            <div class="header_search">
+                <form action="#" id="header_search_form" onsubmit="return false;">
+                    <input 
+                        type="text" 
+                        class="search_input" 
+                        id="header_search_input" 
+                        placeholder="поиск" 
+                        autocomplete="off"
+                        required
+                    >
+                    <button class="header_search_button">
+                        <img src="../images/search.png" alt="Поиск">
+                    </button>
+                    <!-- Контейнер для результатов -->
+                    <div id="header_search_results" class="search-results"></div>
+                </form>
+            </div>
                 <!-- User -->
                 <div class="user" type="button" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat"><a href="../registration.php">
                         <div><img class="svg" src="../images/user.svg" alt="https://www.flaticon.com/authors/freepik">
@@ -95,7 +107,7 @@ $row = $result->fetch_row();
                     <div>
                         <div><img src="../images/phone.svg" alt="https://www.flaticon.com/authors/freepik"></div>
                     </div>
-                    <div>+7 926-078-89-99</div>
+                    <div>+7 926-078-89-78</div>
                 </div>
             </div>
         </div>
